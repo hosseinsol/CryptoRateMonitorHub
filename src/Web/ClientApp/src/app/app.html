@@ -1,0 +1,366 @@
+<div class="min-h-screen p-4 md:p-8 font-sans antialiased transition-colors duration-500 ease-in-out selection:bg-violet-500 selection:text-white relative"
+     [dir]="currentLang() === 'fa' ? 'rtl' : 'ltr'"
+     [class.bg-[#070814]]="currentTheme() === 'dark'"
+     [class.text-slate-100]="currentTheme() === 'dark'"
+     [class.bg-[#f8f9fc]]="currentTheme() === 'light'"
+     [class.text-slate-800]="currentTheme() === 'light'">
+  
+  <!-- Glow Background Accents (only shown in dark mode for premium look) -->
+  @if (currentTheme() === 'dark') {
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-violet-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+    <div class="fixed bottom-10 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+  }
+
+  <div class="max-w-5xl mx-auto space-y-6 relative z-10">
+    
+    <!-- TOP BAR: Live Language & Theme Toggles -->
+    <div class="flex items-center justify-between p-3.5 rounded-2xl shadow-sm border transition-all duration-300"
+         [class.bg-[#10122e]/60]="currentTheme() === 'dark'"
+         [class.border-violet-500/10]="currentTheme() === 'dark'"
+         [class.bg-white]="currentTheme() === 'light'"
+         [class.border-slate-200]="currentTheme() === 'light'">
+      
+      <!-- Theme Switcher -->
+      <div class="flex items-center gap-1 p-1 rounded-xl border transition-all"
+           [class.bg-slate-950/40]="currentTheme() === 'dark'"
+           [class.border-violet-500/10]="currentTheme() === 'dark'"
+           [class.bg-slate-100]="currentTheme() === 'light'"
+           [class.border-slate-200]="currentTheme() === 'light'">
+        <button 
+          type="button"
+          (click)="currentTheme.set('dark')"
+          [class.bg-gradient-to-r]="currentTheme() === 'dark'"
+          [class.from-violet-600]="currentTheme() === 'dark'"
+          [class.to-indigo-600]="currentTheme() === 'dark'"
+          [class.text-white]="currentTheme() === 'dark'"
+          [class.shadow-md]="currentTheme() === 'dark'"
+          [class.bg-white/5]="currentTheme() === 'light'"
+          [class.text-slate-400]="currentTheme() === 'light'"
+          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-300 hover:text-white cursor-pointer"
+          [class.hover:text-slate-900]="currentTheme() === 'light'"
+        >
+          <mat-icon class="text-xs scale-90">dark_mode</mat-icon>
+          <span class="hidden sm:inline text-[10px]">{{ t().themeDark }}</span>
+        </button>
+        <button 
+          type="button"
+          (click)="currentTheme.set('light')"
+          [class.bg-white]="currentTheme() === 'light'"
+          [class.text-violet-700]="currentTheme() === 'light'"
+          [class.shadow-sm]="currentTheme() === 'light'"
+          [class.border]="currentTheme() === 'light'"
+          [class.border-slate-200]="currentTheme() === 'light'"
+          [class.text-slate-400]="currentTheme() === 'dark'"
+          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-300 hover:text-slate-200 cursor-pointer"
+          [class.hover:text-slate-700]="currentTheme() === 'light'"
+        >
+          <mat-icon class="text-xs scale-90">light_mode</mat-icon>
+          <span class="hidden sm:inline text-[10px]">{{ t().themeLight }}</span>
+        </button>
+      </div>
+
+      <!-- Language Switcher -->
+      <div class="flex items-center gap-1 p-1 rounded-xl border transition-all"
+           [class.bg-slate-950/40]="currentTheme() === 'dark'"
+           [class.border-violet-500/10]="currentTheme() === 'dark'"
+           [class.bg-slate-100]="currentTheme() === 'light'"
+           [class.border-slate-200]="currentTheme() === 'light'">
+        <button 
+          type="button"
+          (click)="currentLang.set('fa')"
+          [class.bg-gradient-to-r]="currentLang() === 'fa' && currentTheme() === 'dark'"
+          [class.from-violet-600]="currentLang() === 'fa' && currentTheme() === 'dark'"
+          [class.to-indigo-600]="currentLang() === 'fa' && currentTheme() === 'dark'"
+          [class.bg-violet-600]="currentLang() === 'fa' && currentTheme() === 'light'"
+          [class.text-white]="currentLang() === 'fa'"
+          [class.shadow-md]="currentLang() === 'fa'"
+          [class.text-slate-400]="currentLang() !== 'fa'"
+          class="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-300 hover:text-white cursor-pointer"
+          [class.hover:text-slate-950]="currentTheme() === 'light' && currentLang() !== 'fa'"
+          [class.text-slate-600]="currentTheme() === 'light' && currentLang() !== 'fa'"
+        >
+          Farsi
+        </button>
+        <button 
+          type="button"
+          (click)="currentLang.set('en')"
+          [class.bg-gradient-to-r]="currentLang() === 'en' && currentTheme() === 'dark'"
+          [class.from-violet-600]="currentLang() === 'en' && currentTheme() === 'dark'"
+          [class.to-indigo-600]="currentLang() === 'en' && currentTheme() === 'dark'"
+          [class.bg-violet-600]="currentLang() === 'en' && currentTheme() === 'light'"
+          [class.text-white]="currentLang() === 'en'"
+          [class.shadow-md]="currentLang() === 'en'"
+          [class.text-slate-400]="currentLang() !== 'en'"
+          class="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-300 hover:text-white cursor-pointer"
+          [class.hover:text-slate-950]="currentTheme() === 'light' && currentLang() !== 'en'"
+          [class.text-slate-600]="currentTheme() === 'light' && currentLang() !== 'en'"
+        >
+          English
+        </button>
+      </div>
+    </div>
+    
+    <!-- Header BRAND bar -->
+    <header id="app-header" class="flex flex-col md:flex-row md:items-center md:justify-between pb-6 border-b gap-4 transition-colors duration-300"
+            [class.border-violet-950/45]="currentTheme() === 'dark'"
+            [class.border-slate-200]="currentTheme() === 'light'">
+      <div class="space-y-1">
+        <div class="flex items-center gap-3 justify-center md:justify-start">
+          <div class="p-2.5 bg-gradient-to-tr from-violet-600 to-indigo-600 rounded-xl shadow-[0_0_20px_rgba(124,58,237,0.3)]">
+            <mat-icon class="text-white">monetization_on</mat-icon>
+          </div>
+          <h1 class="text-2xl md:text-3xl font-black tracking-tight"
+              [class.text-transparent]="currentTheme() === 'dark'"
+              [class.bg-clip-text]="currentTheme() === 'dark'"
+              [class.bg-gradient-to-l]="currentTheme() === 'dark' && currentLang() === 'fa'"
+              [class.bg-gradient-to-r]="currentTheme() === 'dark' && currentLang() === 'en'"
+              [class.from-violet-300]="currentTheme() === 'dark'"
+              [class.via-indigo-200]="currentTheme() === 'dark'"
+              [class.to-white]="currentTheme() === 'dark'"
+              [class.text-slate-900]="currentTheme() === 'light'">
+            {{ t().appTitle }}
+          </h1>
+        </div>
+        <p class="text-xs md:text-sm text-center md:text-start font-medium"
+           [class.text-slate-400]="currentTheme() === 'dark'"
+           [class.text-slate-500]="currentTheme() === 'light'">
+          {{ t().appSubtitle }}
+        </p>
+      </div>
+    </header>
+
+    <!-- LIVE MONITORING DASHBOARD (STREET-READY AND PROFESSIONAL) -->
+    <div class="space-y-6">
+      
+      <!-- Search, Filters and Tags Section -->
+      <section id="search-section" class="p-6 rounded-2xl border transition-all duration-300 space-y-4"
+               [class.bg-[#10122e]/45]="currentTheme() === 'dark'"
+               [class.backdrop-blur-md]="currentTheme() === 'dark'"
+               [class.border-violet-500/15]="currentTheme() === 'dark'"
+               [class.shadow-[0_0_50px_-12px_rgba(139,92,246,0.15)]]="currentTheme() === 'dark'"
+               [class.bg-white]="currentTheme() === 'light'"
+               [class.border-slate-200]="currentTheme() === 'light'"
+               [class.shadow-[0_4px_25px_rgba(0,0,0,0.03)]]="currentTheme() === 'light'">
+        <div class="flex flex-col md:flex-row gap-3 items-stretch">
+          <div class="relative flex-1">
+            <span class="absolute inset-y-0 flex items-center text-violet-400"
+                  [class.right-4]="currentLang() === 'fa'"
+                  [class.left-4]="currentLang() === 'en'">
+              <mat-icon>search</mat-icon>
+            </span>
+            <input
+              id="crypto-search-input"
+              type="text"
+              [placeholder]="t().inputPlaceholder"
+              [formControl]="searchControl"
+              (keyup.enter)="onSearch()"
+              [class.bg-[#090a18]/70]="currentTheme() === 'dark'"
+              [class.text-white]="currentTheme() === 'dark'"
+              [class.border-violet-500/20]="currentTheme() === 'dark'"
+              [class.focus:border-violet-500/60]="currentTheme() === 'dark'"
+              [class.focus:ring-violet-500/40]="currentTheme() === 'dark'"
+              [class.bg-slate-50]="currentTheme() === 'light'"
+              [class.text-slate-900]="currentTheme() === 'light'"
+              [class.border-slate-350]="currentTheme() === 'light'"
+              [class.border-slate-200/90]="currentTheme() === 'light'"
+              [class.focus:border-violet-600/65]="currentTheme() === 'light'"
+              [class.focus:ring-violet-600/20]="currentTheme() === 'light'"
+              [class.pr-12]="currentLang() === 'fa'"
+              [class.pl-4]="currentLang() === 'fa'"
+              [class.pl-12]="currentLang() === 'en'"
+              [class.pr-4]="currentLang() === 'en'"
+              class="w-full rounded-xl py-3.5 border focus:outline-none focus:ring-1 transition duration-300 text-start uppercase tracking-wider font-semibold placeholder:text-slate-400 text-sm"
+            />
+          </div>
+          
+          <button
+            id="search-action-btn"
+            type="button"
+            (click)="onSearch()"
+            [disabled]="isLoading()"
+            class="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-semibold py-3.5 px-7 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 shadow-[0_0_15px_-3px_rgba(124,58,237,0.4)] hover:shadow-[0_0_20px_1px_rgba(124,58,237,0.3)] disabled:opacity-50 min-w-[160px] cursor-pointer"
+          >
+            @if (isLoading()) {
+              <span class="w-4 h-4 rounded-full border-2 border-white/20 border-t-white animate-spin"></span>
+              <span>{{ t().searchingButton }}</span>
+            } @else {
+              <mat-icon class="scale-95">cached</mat-icon>
+              <span>{{ t().searchButton }}</span>
+            }
+          </button>
+        </div>
+
+        <!-- Shortcuts chips -->
+        <div class="flex flex-wrap items-center gap-2 text-xs">
+          <span class="font-medium mr-1"
+                [class.text-slate-400]="currentTheme() === 'dark'"
+                [class.text-slate-500]="currentTheme() === 'light'">{{ t().quickSearch }}</span>
+          @for (item of recommendations; track item) {
+            <button
+              [id]="'chip-' + item"
+              type="button"
+              (click)="fetchCryptoRates(item)"
+              [class.bg-[#0f1124]/90]="currentTheme() === 'dark'"
+              [class.border-violet-950]="currentTheme() === 'dark'"
+              [class.text-violet-300]="currentTheme() === 'dark'"
+              [class.hover:bg-violet-950/40]="currentTheme() === 'dark'"
+              [class.bg-slate-100]="currentTheme() === 'light'"
+              [class.border-slate-250]="currentTheme() === 'light'"
+              [class.border-slate-200]="currentTheme() === 'light'"
+              [class.text-violet-700]="currentTheme() === 'light'"
+              [class.hover:bg-violet-100/40]="currentTheme() === 'light'"
+              class="px-3 py-1.5 rounded-lg border transition duration-200 uppercase font-mono tracking-wider cursor-pointer"
+            >
+              {{ item }}
+            </button>
+          }
+        </div>
+      </section>
+
+      <!-- Loading HUD -->
+      @if (isLoading()) {
+        <div id="loading-panel" class="flex flex-col items-center justify-center py-20 bg-slate-900/10 rounded-2xl border border-violet-500/5 space-y-4">
+          <div class="w-12 h-12 rounded-full border-4 border-violet-500/20 border-t-violet-500 animate-spin"></div>
+          <p class="text-violet-500 font-medium text-sm animate-pulse tracking-wide font-sans">
+            {{ t().loadingMessage }}
+          </p>
+        </div>
+      }
+
+      <!-- Error Panel -->
+      @if (errorMsg(); as msg) {
+        @if (!isLoading()) {
+          <div id="error-panel" class="p-5 bg-rose-500/10 border border-rose-500/20 rounded-2xl flex items-center gap-4 text-rose-200 shadow-lg">
+            <div class="p-2 bg-rose-500/25 rounded-xl text-rose-400">
+              <mat-icon>error_outline</mat-icon>
+            </div>
+            <div class="text-start">
+              <h4 class="font-bold text-rose-600">{{ t().errorTitle }}</h4>
+              <p class="text-xs md:text-sm mt-0.5 text-rose-500/80">{{ msg }}</p>
+            </div>
+          </div>
+        }
+      }
+
+      <!-- Loaded Data Layout -->
+      @if (activeCrypto(); as crypto) {
+        @if (!isLoading()) {
+          <div class="space-y-6">
+            
+            <!-- Crypto Details Banner card -->
+            <div id="crypto-banner" class="p-6 rounded-2xl border shadow-xl flex flex-col md:flex-row md:items-center md:justify-between gap-4 transition-all duration-300"
+                 [class.bg-[#121434]/40]="currentTheme() === 'dark'"
+                 [class.border-violet-500/15]="currentTheme() === 'dark'"
+                 [class.bg-white]="currentTheme() === 'light'"
+                 [class.border-slate-200]="currentTheme() === 'light'">
+              <div class="space-y-2 text-start">
+                <div class="flex items-center gap-3 flex-wrap">
+                  <span class="bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-extrabold text-xs px-2.5 py-1 rounded-md uppercase font-mono tracking-widest shadow-md">
+                    {{ crypto.code }}
+                  </span>
+                  <h2 class="text-xl md:text-2xl font-black"
+                      [class.text-white]="currentTheme() === 'dark'"
+                      [class.text-slate-900]="currentTheme() === 'light'">
+                    {{ displayedCryptoName() }}
+                  </h2>
+                  
+                  <span 
+                    [class.bg-emerald-500/15]="crypto.change24h >= 0"
+                    [class.text-emerald-400]="crypto.change24h >= 0"
+                    [class.bg-rose-500/15]="crypto.change24h < 0"
+                    [class.text-rose-400]="crypto.change24h < 0"
+                    class="text-xs font-bold flex items-center gap-1.5 px-3 py-1 rounded-full shadow-sm"
+                  >
+                    <mat-icon class="scale-75 translate-y-[-1px]">
+                      {{ crypto.change24h >= 0 ? 'trending_up' : 'trending_down' }}
+                    </mat-icon>
+                    {{ crypto.change24h >= 0 ? '+' : '' }}{{ crypto.change24h }}% ({{ t().change24 }})
+                  </span>
+                </div>
+                <p class="text-xs md:text-sm leading-relaxed max-w-3xl"
+                   [class.text-slate-300]="currentTheme() === 'dark'"
+                   [class.text-slate-600]="currentTheme() === 'light'">
+                  {{ displayedCryptoDescription() }}
+                </p>
+              </div>
+              
+              <div class="text-start whitespace-nowrap p-3 rounded-xl border shrink-0"
+                   [class.bg-slate-950/40]="currentTheme() === 'dark'"
+                   [class.border-violet-950/50]="currentTheme() === 'dark'"
+                   [class.bg-slate-50]="currentTheme() === 'light'"
+                   [class.border-slate-200]="currentTheme() === 'light'">
+                <p class="text-[10px] font-semibold"
+                   [class.text-slate-400]="currentTheme() === 'dark'"
+                   [class.text-slate-500]="currentTheme() === 'light'">{{ t().lastUpdated }}</p>
+                <p class="text-xs font-mono font-semibold mt-1 tracking-wider" 
+                   [class.text-violet-400]="currentTheme() === 'dark'"
+                   [class.text-violet-700]="currentTheme() === 'light'"
+                   [dir]="'ltr'">
+                  {{ crypto.lastUpdated | date:'yyyy-MM-dd HH:mm:ss' }}
+                </p>
+              </div>
+            </div>
+
+            <!-- Gorgeous 5 Currency Rate Cards grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+              @for (rateEntry of crypto.rates | keyvalue; track rateEntry.key) {
+                @let currMeta = displayedCurrencyMetadata()[rateEntry.key] || { name: 'Fait Rate', symbol: '¤', colorClass: 'text-white', cardBorderClass: 'border-violet-500/15', cardGradient: 'from-slate-900/80 to-slate-900/50' };
+                <div
+                  [id]="'rate-card-' + rateEntry.key"
+                  class="group p-5 rounded-2xl border flex flex-col justify-between h-44 shadow-lg hover:-translate-y-2 transition-all duration-300 transform"
+                  [class]="currMeta.cardBorderClass"
+                  [class.bg-[#12143a]/50]="currentTheme() === 'dark'"
+                  [class.backdrop-blur-md]="currentTheme() === 'dark'"
+                  [class.hover:shadow-[0_4px_30px_-5px_rgba(139,92,246,0.3)]]="currentTheme() === 'dark'"
+                  [class.bg-white]="currentTheme() === 'light'"
+                  [class.hover:shadow-[0_4px_25px_rgba(0,0,0,0.06)]]="currentTheme() === 'light'"
+                >
+                  <div class="flex items-start justify-between">
+                    <div class="space-y-0.5 text-start">
+                      <span class="text-[10px] font-semibold block"
+                            [class.text-slate-400]="currentTheme() === 'dark'"
+                            [class.text-slate-500]="currentTheme() === 'light'">{{ currMeta.name }}</span>
+                      <span class="text-xs font-mono font-bold tracking-wider"
+                            [class.text-slate-300]="currentTheme() === 'dark'"
+                            [class.text-slate-600]="currentTheme() === 'light'">{{ rateEntry.key }}</span>
+                    </div>
+                    <span class="text-2xl font-black font-mono transition-transform duration-300 group-hover:scale-110" 
+                          [class]="currMeta.colorClass">
+                      {{ currMeta.symbol }}
+                    </span>
+                  </div>
+
+                  <div class="space-y-1 text-start mt-auto">
+                    <p class="text-[10px] font-semibold tracking-wide"
+                       [class.text-slate-400]="currentTheme() === 'dark'"
+                       [class.text-slate-500]="currentTheme() === 'light'">{{ t().rateLabel }}</p>
+                    <p class="text-lg md:text-xl font-black font-mono tracking-tight text-start break-all" 
+                       [class.text-white]="currentTheme() === 'dark'"
+                       [class.text-slate-800]="currentTheme() === 'light'"
+                       dir="ltr">
+                      {{ formatRate(rateEntry.value) }}
+                    </p>
+                  </div>
+                </div>
+              }
+            </div>
+
+          </div>
+        }
+      }
+
+    </div>
+
+    <!-- Brand Footer -->
+    <footer id="app-footer" class="py-6 text-center text-[10px] border-t"
+            [class.text-slate-500]="currentTheme() === 'dark'"
+            [class.border-violet-950/30]="currentTheme() === 'dark'"
+            [class.text-slate-500]="currentTheme() === 'light'"
+            [class.border-slate-200]="currentTheme() === 'light'">
+      <p class="font-medium">
+        {{ t().footerText }}
+      </p>
+    </footer>
+
+  </div>
+</div>

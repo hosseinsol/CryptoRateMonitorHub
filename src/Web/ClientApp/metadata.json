@@ -1,0 +1,6 @@
+{
+  "name": "Crypto Rate Monitor",
+  "description": "A high-performance cryptocurrency rate monitoring dashboard with live search, multi-currency rates, and elegant interactive elements.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

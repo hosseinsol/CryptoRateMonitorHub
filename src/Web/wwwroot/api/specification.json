@@ -1,0 +1,61 @@
+{
+  "x-generator": "NSwag v14.1.0.0 (NJsonSchema v11.0.2.0 (Newtonsoft.Json v13.0.0.0))",
+  "openapi": "3.0.0",
+  "info": {
+    "title": "CryptoRateMonitor API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/CryptoQuotes/{symbol}": {
+      "get": {
+        "tags": [
+          "CryptoQuotes"
+        ],
+        "operationId": "GetQuote",
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CryptoQuoteDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CryptoQuoteDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "symbol": {
+            "type": "string"
+          },
+          "quotes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number",
+              "format": "decimal"
+            }
+          }
+        }
+      }
+    }
+  }
+}
